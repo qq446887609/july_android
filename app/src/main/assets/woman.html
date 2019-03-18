@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的生活</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- 解决1像素border-bottom问题 -->
+    <link rel="stylesheet" href="./border.css">
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.css">
+</head>
+<style>
+    .card-content img{
+        max-height:20rem
+    }
+</style>
+<script>
+
+</script>
+<body >
+<!-- page集合的容器，里面放多个平行的.page，其他.page作为内联页面由路由控制展示 -->
+<div class="page-group">
+    <!-- 单个page ,第一个.page默认被展示-->
+    <div id="app"  class="page">
+        <!-- 标题栏 -->
+        <header class="bar bar-nav">
+            <a class="icon icon-left pull-left"></a>
+            <a class="icon icon-refresh pull-right"></a>
+            <h1 class="title">动漫</h1>
+        </header>
+        <div class="content infinite-scroll infinite-scroll-bottom" data-distance="50">
+            <div  class="list-container">
+
+                <div v-for="(item,index) in list" style="margin: 0" class="card facebook-card">
+                    <div class="content-padded">
+                        <div class="card-header border-bottom">
+                            <div class="facebook-avatar" style="margin-right:0.6rem"><img style="border-radius: 50%" src="https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=2cf92b07f603918fc3dc359830544df2/3b292df5e0fe9925f3ef15b735a85edf8cb17171.jpg" width="40" height="40"></div>
+                            <div  class="facebook-name">多啦H梦</div>
+                            <div class="facebook-date">{{item.created_at}}</div>
+                        </div>
+
+                        <div class="card-content">
+                            <div class="card-content-inner">
+                                <p @click="startDetail(item)"  style="font-size: 1rem" >{{item.title}}</p>
+                            </div>
+                        </div>
+                        <div  class="card-content"><img v-block style="" :src="item.cover_url" width="100%"></div>
+                        <div class="card-content">
+                            <div class="card-content-inner">
+                                <p class="color-gray">{{item.description}}</p>
+                            </div>
+                        </div>
+                        <div style="background-color: white" class="card-footer border-top">
+                            <a style="display: block; min-width: 5rem;height: 1rem;background-color: #eeeeee;text-align: center;border-radius: 0.25rem" href="#" >{{item.tag}}</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 加载提示符 -->
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+
+            <div style="height:2.6rem;width:100%">
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <!-- 其他的单个page内联页（如果有） -->
+    <div class="page">...</div>
+</div>
+
+<!-- popup, panel 等放在这里 -->
+<div class="panel-overlay"></div>
+<!-- Left Panel with Reveal effect -->
+<div class="panel panel-left panel-reveal">
+    <div class="content-block">
+        <p>这是一个侧栏</p>
+        <p></p>
+        <!-- Click on link with "close-panel" class will close panel -->
+        <p><a href="#" class="close-panel">关闭</a></p>
+    </div>
+</div>
+
+
+<!-- 默认必须要执行$.init(),实际业务里一般不会在HTML文档里执行，通常是在业务页面代码的最后执行 -->
+<script type='text/javascript' src='http://g.alicdn.com/sj/lib/zepto/zepto.js' charset='utf-8'></script>
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm.js' charset='utf-8'></script>
+<!--如果你用到了拓展包中的组件，还需要引用下面两个-->
+<link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm-extend.css">
+<script type='text/javascript' src='http://g.alicdn.com/msui/sm/0.6.2/js/sm-extend.js' charset='utf-8'></script>
+
+<!-- 引入vue开发环境版本，包含了有帮助的命令行警告 -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<!-- axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+</body>
+<script>
+
+    //todo 封装
+
+
+    // 加载flag
+    var loading = false;
+
+    var base_url = "http://www.tasays.cn/july/public/api/";
+
+    var app = new Vue({
+        el:"#app",
+        data:{
+            list:[],
+            offset:0,
+            limit:6
+        },
+        methods:{
+            get_cartoon_list:function () {
+                var url = base_url+"articles/"+this.offset+"/"+this.limit;
+                console.log(url);
+                var _this = this;
+                axios.get(url).then(function (res) {
+                    var data = res.data;
+                    if(data.code==0)//获得成功
+                    {
+                        if(data.data.list)//数据不为空的话
+                        {
+                            loading = false;
+
+                            _this.offset = (parseInt(_this.offset)+1)*_this.limit; //更新offset
+
+                            _this.list = _this.list.concat(data.data.list);
+                            //容器发生改变,如果是js滚动，需要刷新滚动
+                            //$.refreshScroller();
+                        }
+                        else //没有数据的话
+                        {
+                            // 加载完毕，则注销无限加载事件，以防不必要的加载
+                            //$.detachInfiniteScroll($('.infinite-scroll'));
+                            // 删除加载提示符
+                            //$('.infinite-scroll-preloader').remove();
+                            return;
+                        }
+                    }
+
+                }).catch(function (error) {
+                    console.log(error);
+                })
+            },
+            startDetail:function(item)
+            {
+                console.log(item.id);
+             try{
+                    webView.startDetail(item.id,"woman");
+
+                }catch(e){
+                    console.log(e);
+                }
+            }
+        },
+        created:function () {
+            //初始化数据
+            this.get_cartoon_list();
+        }
+    });
+
+
+
+
+    //触发无限加载
+    $(function() {
+
+        // 注册'infinite'事件处理函数
+        $(document).on('infinite', '.infinite-scroll-bottom',function() {
+
+            // 如果正在加载，则退出
+            if (loading) return;
+
+            // 设置flag
+            loading = true;
+
+            app.get_cartoon_list();
+
+            /*
+            // 模拟1s的加载过程
+            setTimeout(function() {
+                // 重置加载flag
+                loading = false;
+
+                if (lastIndex >= maxItems) {
+                    // 加载完毕，则注销无限加载事件，以防不必要的加载
+                    $.detachInfiniteScroll($('.infinite-scroll'));
+                    // 删除加载提示符
+                    $('.infinite-scroll-preloader').remove();
+                    return;
+                }
+
+                // 添加新条目
+                addItems(itemsPerLoad, lastIndex);
+                // 更新最后加载的序号
+                lastIndex = $('.list-container li').length;
+                //容器发生改变,如果是js滚动，需要刷新滚动
+                $.refreshScroller();
+            }, 1000);
+            */
+        });
+        $.init();
+    });
+</script>
+</html>

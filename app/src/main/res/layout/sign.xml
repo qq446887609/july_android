@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingTop="40dp"
+            android:paddingBottom="40dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/logo"
+                android:layout_width="146dp"
+                android:layout_height="146dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="短信验证码"
+                    android:id="@+id/sign_code"
+                    android:paddingLeft="16dp"
+                    android:maxLength="4"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="40dp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="昵称"
+                    android:id="@+id/sign_nickname"
+                    android:paddingLeft="16dp"
+                    min
+                    android:maxLength="25"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="40dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:hint="密码"
+                    android:id="@+id/sign_password"
+                    android:layout_marginTop="8dp"
+                    android:inputType="textPassword"
+                    android:paddingLeft="16dp"
+                    android:background="@drawable/edit_bg"
+                    android:layout_height="40dp" />
+                <Button
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:text="注册"
+                    android:textColor="@color/base_gray"
+                    android:gravity="center"
+                    android:id="@+id/sign_btn"
+                    android:background="@color/base_faint_yellow"
+                    android:layout_height="44dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="28dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:text="已注册账号?"
+                android:textSize="14dp"
+                android:textColor="@color/base_gray"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:text="登录"
+                android:textSize="14dp"
+                android:textColor="@color/gold"
+                android:id="@+id/jump_login"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

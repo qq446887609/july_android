@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:paddingTop="40dp"
+            android:paddingBottom="40dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/logo"
+                android:layout_width="146dp"
+                android:layout_height="146dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_height="wrap_content">
+            <EditText
+                android:paddingLeft="16dp"
+                android:layout_width="match_parent"
+                android:hint="手机号"
+                android:id="@+id/phone"
+                android:background="@drawable/edit_bg"
+                android:layout_marginTop="8dp"
+                android:layout_height="40dp" />
+            <EditText
+                android:layout_width="match_parent"
+                android:hint="密码"
+                android:id="@+id/password"
+                android:paddingLeft="16dp"
+                android:background="@drawable/edit_bg"
+                android:layout_marginTop="8dp"
+                android:inputType="textPassword"
+                android:layout_height="40dp" />
+            <Button
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:text="登录"
+                android:id="@+id/login_btn"
+                android:textColor="@color/base_gray"
+                android:gravity="center"
+                android:background="@color/base_faint_yellow"
+                android:layout_height="44dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="忘记密码?"
+                android:textSize="12dp"
+                android:textColor="@color/base_gray"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="注册账号"
+                android:textSize="12dp"
+                android:id="@+id/jump_sign"
+                android:textColor="@color/base_gray"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="28dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:text="使用其他方式登录"
+                android:textSize="12dp"
+                android:textColor="@color/base_gray"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:paddingTop="20dp"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="48dp"
+                android:src="@drawable/qq"
+                android:id="@+id/qq_login"
+                android:layout_height="48dp" />
+            <ImageView
+                android:layout_marginLeft="40dp"
+                android:layout_width="48dp"
+                android:src="@drawable/wb"
+                android:id="@+id/wb_login"
+                android:layout_height="48dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

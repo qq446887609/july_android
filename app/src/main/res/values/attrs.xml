@@ -1,0 +1,8 @@
+<resources>
+        <declare-styleable name="CountDownButton">
+                <attr name="millisinfuture" format="integer"/>
+                <attr name="countdowninterva" format="integer"/>
+                <attr name="normalColor" format="color"/>
+                <attr name="countDownColor" format="color"/>
+        </declare-styleable>
+</resources>
