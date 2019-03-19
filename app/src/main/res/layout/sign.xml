@@ -49,7 +49,6 @@
                     android:hint="昵称"
                     android:id="@+id/sign_nickname"
                     android:paddingLeft="16dp"
-                    min
                     android:maxLength="25"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/edit_bg"

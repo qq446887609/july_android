@@ -150,13 +150,13 @@ public class SignStepThreeActivity extends BaseActivity {
 
             @Override
             public void onFailed(int what, Response<String> response) {
-
+                progressDialog.dismiss();
+                showToast("注册失败");
             }
 
             @Override
             public void onFinish(int what) {
-                progressDialog.dismiss();
-                showToast("注册失败");
+
             }
         });
 

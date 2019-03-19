@@ -147,9 +147,9 @@ public class SignStepTwoActivity extends BaseActivity{
     public void postVerify()
     {
         EditText editText = findViewById(R.id.captcha_code);
-        String captchaCode = editText.getText().toString();
+        String captchaCode = editText.getText().toString();//用户输入验证码
         //请求链接
-        String postUrl = "http://tasays.cn/api/verificationCodes";
+        String postUrl = "http://www.tasays.cn/api/verificationCodes";
         //创建请求
         Request<String> req = NoHttp.createStringRequest(postUrl,RequestMethod.POST);
         req.add("captcha_code",captchaCode);
@@ -172,7 +172,7 @@ public class SignStepTwoActivity extends BaseActivity{
                 String result = response.get();//获得返回结果
                 Gson gson = new Gson();
 
-                if (response.responseCode()==201) {
+                if (response.responseCode()==201) {//成功
                     //获得返回数据 key
                     VerificationCodes verificationCodes = gson.fromJson(result,VerificationCodes.class);
                     //跳转用户注册页面
@@ -180,21 +180,26 @@ public class SignStepTwoActivity extends BaseActivity{
                     intent.putExtra("key",verificationCodes.getKey());//获得用以注册账号手机短信key
                     startActivity(intent);
 
-                } else {
+                } else {//失败
                     Result resultModel = gson.fromJson(result,Result.class);//转换api数据为对象
                     showToast(resultModel.getMessage());
+                    //失败后再次更换图片
+                    changeCaptchaImage();
                 }
 
             }
 
             @Override
             public void onFailed(int what, Response<String> response) {
-
+                progressDialog.dismiss();
+                showToast("请求失败");
+                //失败后再次更换图片
+                changeCaptchaImage();
             }
 
             @Override
             public void onFinish(int what) {
-                progressDialog.dismiss();
+
             }
         });
     }
