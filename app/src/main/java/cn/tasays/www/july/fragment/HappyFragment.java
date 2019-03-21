@@ -39,25 +39,16 @@ public class HappyFragment extends Fragment {
     public void  init_view(View view)
     {
         WebView webView = (WebView) view.findViewById(R.id.web_happy_woman);
-
-        //开启webview javascript支持
-        WebSettings settings = webView.getSettings();
-
-        webView.setWebViewClient(new WebViewClient());
-
-        webView.loadUrl("file:///android_asset/woman.html");
-
-        settings.setJavaScriptEnabled(true);
-
-        //添加javascript方法
-        webView.addJavascriptInterface(this,"webView");
+        webView.getSettings().setJavaScriptEnabled(true);//开启javascript
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.loadUrl("http://116.196.125.67:8080/#/art_list");
     }
 
-    //重写javascript接口方法 跳转detail
-    /**
+    /*//重写javascript接口方法 跳转detail
+    *//**
      * @param id     文章or数据id
      * @param model  model 具体操作哪张表
-     */
+     *//*
     @JavascriptInterface
     public void startDetail(String id,String model)
     {
@@ -66,5 +57,5 @@ public class HappyFragment extends Fragment {
         intent.putExtra("model",model);
         intent.setClass(getActivity(),DetailActivity.class);
         this.startActivity(intent);
-    }
+    }*/
 }

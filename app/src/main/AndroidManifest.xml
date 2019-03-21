@@ -44,6 +44,10 @@
         <activity
             android:name=".activity.DetailActivity"
             android:label="@string/title_activity_detail"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".activity.UserActivity"
+            android:label="@string/title_activity_user"
             android:theme="@style/AppTheme"></activity>
     </application>
 
