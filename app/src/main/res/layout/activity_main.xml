@@ -30,6 +30,7 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
+                android:id="@+id/menu_index_img"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/index" />
@@ -49,6 +50,7 @@
             android:orientation="vertical"
             android:gravity="center">
             <ImageView
+                android:id="@+id/menu_book_img"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/book" />
@@ -69,6 +71,7 @@
             android:layout_weight="1"
             android:gravity="center">
             <ImageView
+                android:id="@+id/menu_happy_img"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/woman" />
@@ -89,6 +92,7 @@
             android:layout_weight="1"
             android:gravity="center">
             <ImageView
+                android:id="@+id/menu_me_img"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@drawable/me" />

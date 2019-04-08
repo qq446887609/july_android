@@ -9,7 +9,7 @@ import android.view.View;
 
 import cn.tasays.www.july.R;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     protected Handler myHandelr = new Handler();
 
@@ -33,5 +33,8 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this, LoginActivity.class));
             }
         }, 2000);
+
+        //添加activity到栈中
+        add(SplashActivity.this);
     }
 }

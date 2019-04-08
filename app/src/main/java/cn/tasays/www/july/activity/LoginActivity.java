@@ -46,6 +46,8 @@ public class LoginActivity extends BaseActivity {
         //other login
         other_login();
 
+        //添加activity到栈中
+        add(LoginActivity.this);
     }
 
     private void jump_sign_listen() {
@@ -108,13 +110,12 @@ public class LoginActivity extends BaseActivity {
         //sharedPreferences 中获得 保存账号信息
         SharedPreferences user_data = getSharedPreferences("user_data",MODE_PRIVATE);
 
-        phone = user_data.getString("phone","");
-        password = user_data.getString("password","");
+        String access_token = user_data.getString("access_token","");
 
-        if(!phone.equals("")&&!password.equals(""))
+        if(!access_token.isEmpty())
         {
-            //判断是否为空 不为空自动登录
-            login();
+            //跳转首页 mainactivity webview vue页面
+            startActivity(new Intent(LoginActivity.this,MainActivity.class));
         }
     }
 
@@ -124,7 +125,7 @@ public class LoginActivity extends BaseActivity {
         //校验参数
         String message = checkLoginData();
 
-        if(!message.equals(""))
+        if(!message.isEmpty())
         {
             showToast(message);
             return;
@@ -137,12 +138,12 @@ public class LoginActivity extends BaseActivity {
     //验证数据
     private String checkLoginData()
     {
-        if(phone.equals(""))
+        if(phone.isEmpty())
         {
             return "手机号不能为空";
         }
 
-        if(password.equals(""))
+        if(password.isEmpty())
         {
             return "密码不能为空";
         }

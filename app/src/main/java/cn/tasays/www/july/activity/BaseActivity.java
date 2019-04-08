@@ -1,5 +1,6 @@
 package cn.tasays.www.july.activity;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
@@ -15,6 +16,8 @@ import com.yanzhenjie.nohttp.NoHttp;
 import com.yanzhenjie.nohttp.rest.OnResponseListener;
 import com.yanzhenjie.nohttp.rest.Request;
 import com.yanzhenjie.nohttp.rest.RequestQueue;
+
+import java.util.Stack;
 
 import cn.tasays.www.july.R;
 
@@ -88,6 +91,32 @@ public class BaseActivity extends AppCompatActivity {
         }
 
         return  decodedByte;
+    }
+
+
+    //activity合集
+    private static Stack<Activity> activities = new Stack<>();
+
+    public static void add(Activity activity) {
+        activities.add(activity);
+    }
+
+    //在某个activity中调用此方法，可以删除自己
+
+    public static void remove(Activity activity) {
+        activities.remove(activity);
+    }
+
+    //清空存放activity的集合
+    public static void clear() {
+        activities.clear();
+    }
+
+    //在退出应用的时候遍历关闭所有的activity
+    public static void killAll() {
+        for (Activity activity : activities) {
+            activity.finish();
+        }
     }
 
 }

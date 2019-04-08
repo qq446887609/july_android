@@ -3,6 +3,9 @@ package cn.tasays.www.july.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +24,7 @@ import cn.tasays.www.july.R;
 public class UserFragment extends BaseFragment {
 
     private View view;
+    private FragmentTransaction fragmentTransaction;
 
     @Nullable
     @Override
@@ -30,6 +34,12 @@ public class UserFragment extends BaseFragment {
         view = inflater.inflate(R.layout.user,container,false);
 
         init_view(view);
+
+        //添加fragment到栈中
+        FragmentManager fragmentManager = getFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack("index");
+        fragmentTransaction.commit();
 
         return  view;
     }
@@ -42,5 +52,10 @@ public class UserFragment extends BaseFragment {
         //请求地址
         String getUrl = "http://www.tasays.cn/api/user";
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode,KeyEvent event) {
+        return false;
     }
 }
