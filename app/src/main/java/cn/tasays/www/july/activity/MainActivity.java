@@ -213,7 +213,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //添加需要修改的图片到数组
         List<BaseImg> img_list = new ArrayList<BaseImg>();
-        img_list.add(createBaseImgObj((ImageView) findViewById(R.id.menu_happy_img),getResources().getDrawable(R.drawable.book)));
+        img_list.add(createBaseImgObj((ImageView) findViewById(R.id.menu_happy_img),getResources().getDrawable(R.drawable.woman)));
         img_list.add(createBaseImgObj((ImageView) findViewById(R.id.menu_index_img),getResources().getDrawable(R.drawable.index)));
         img_list.add(createBaseImgObj((ImageView) findViewById(R.id.menu_book_img),getResources().getDrawable(R.drawable.book)));
         img_list.add(createBaseImgObj((ImageView) findViewById(R.id.menu_me_img),getResources().getDrawable(R.drawable.me)));
