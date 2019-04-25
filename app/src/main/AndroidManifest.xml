@@ -48,7 +48,10 @@
         <activity
             android:name=".activity.UserActivity"
             android:label="@string/title_activity_user"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".activity.ChaChaDetailActivity" />
+        <activity android:name=".activity.BookRecommendDetailList" />
+        <activity android:name=".activity.BookDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package cn.tasays.www.july.fragment;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,11 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.TextView;
+import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.jsevent.IndexVueJsEvent;
 
+import static android.content.Context.MODE_PRIVATE;
 import static cn.tasays.www.july.activity.BaseActivity.killAll;
 
 /**
@@ -45,12 +48,38 @@ public class IndexFragment extends BaseFragment{
         return  view;
     }
 
+    //加载首页
     public void initView(View view)
     {
-        WebView webView = (WebView) view.findViewById(R.id.index_webveiw);
+        final WebView webView = (WebView) view.findViewById(R.id.index_webveiw);
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
         webView.loadUrl("http://116.196.125.67:8080/#/");
+
+        //类 IndexVueJsEvent 在 JS 中映射为了 $App，所以在 Vue 中可以这样调用 $App.showToast("js调用的")
+        webView.addJavascriptInterface(new IndexVueJsEvent(getActivity(),webView),"$App");
+
+        //需要等页面加载完在 WebView 的 onPageFinished 方法中写调用逻辑，否则不会执行。
+        webView.setWebViewClient(new WebViewClient(){
+
+            //安卓调用js方法。注意需要在 onPageFinished 回调里调用
+            @Override
+            public void onPageFinished(final WebView view, String url) {
+                super.onPageFinished(view, url);
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //获得登录成功后的用户token
+                        SharedPreferences preferences = getActivity().getSharedPreferences("user_data",MODE_PRIVATE);
+                        String token = preferences.getString("access_token","");
+                        if(!token.isEmpty()){
+                            view.loadUrl("javascript:getUser('"+token+"')");
+                        }
+                    }
+                });
+            }
+        });
+
     }
 
     @Override
