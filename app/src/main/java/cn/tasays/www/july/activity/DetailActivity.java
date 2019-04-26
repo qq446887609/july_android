@@ -23,39 +23,20 @@ public class DetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detail);
-
-        init_web_view();
-    }
-
-    //获得参数加载不同detail
-    public void init_web_view()
-    {
-
-        //获得上一个活动传入的参数
+        //获得上一页面传来的url
         Intent intent = getIntent();
+        String detail_url = intent.getStringExtra("detail_url");
 
-        final String id = intent.getStringExtra("id");
-        String model = intent.getStringExtra("model");
+        WebView webView = (WebView) findViewById(R.id.article_detial);
+        webView.getSettings().setJavaScriptEnabled(true);//开启javascript
+        webView.getSettings().setDomStorageEnabled(true);
+        detail_url = "http://116.196.125.67:8080/#"+detail_url;
+        webView.loadUrl(detail_url);
 
-        webView = (WebView)findViewById(R.id.web_detail);
+        showToast(detail_url);
 
-        //开启webview javascript支持
-        WebSettings settings = webView.getSettings();
-
-        settings.setJavaScriptEnabled(true);
-
-        webView.loadUrl("file:///android_asset/detail.html");
-
-        webView.setWebViewClient(new WebViewClient(){
-            @Override //加载文件完成后 执行js函数
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                webView.loadUrl("javascript:show_detail("+id+")");
-            }
-        });
-
+        //添加activity到栈中
+        add(DetailActivity.this);
     }
-
-
 
 }

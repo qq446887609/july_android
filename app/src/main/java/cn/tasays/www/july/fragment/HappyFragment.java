@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import cn.tasays.www.july.R;
 import cn.tasays.www.july.activity.DetailActivity;
+import cn.tasays.www.july.jsevent.VueJsEvent;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,6 +52,9 @@ public class HappyFragment extends Fragment {
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
         webView.loadUrl("http://116.196.125.67:8080/#/art_list");
+
+        //渲染js事件到vue页面
+        webView.addJavascriptInterface(new VueJsEvent(getActivity(),webView),"$App");
     }
 
     /*//重写javascript接口方法 跳转detail

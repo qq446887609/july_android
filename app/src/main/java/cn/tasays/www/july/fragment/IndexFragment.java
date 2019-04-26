@@ -17,7 +17,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import cn.tasays.www.july.R;
-import cn.tasays.www.july.jsevent.IndexVueJsEvent;
+import cn.tasays.www.july.jsevent.VueJsEvent;
 
 import static android.content.Context.MODE_PRIVATE;
 import static cn.tasays.www.july.activity.BaseActivity.killAll;
@@ -54,10 +54,11 @@ public class IndexFragment extends BaseFragment{
         final WebView webView = (WebView) view.findViewById(R.id.index_webveiw);
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
-        webView.loadUrl("http://116.196.125.67:8080/#/");
 
-        //类 IndexVueJsEvent 在 JS 中映射为了 $App，所以在 Vue 中可以这样调用 $App.showToast("js调用的")
-        webView.addJavascriptInterface(new IndexVueJsEvent(getActivity(),webView),"$App");
+        webView.loadUrl("http://116.196.125.67:8080/#/");
+        //渲染js事件到vue页面
+        webView.addJavascriptInterface(new VueJsEvent(getActivity(),webView),"$App");
+
 
         //需要等页面加载完在 WebView 的 onPageFinished 方法中写调用逻辑，否则不会执行。
         webView.setWebViewClient(new WebViewClient(){
