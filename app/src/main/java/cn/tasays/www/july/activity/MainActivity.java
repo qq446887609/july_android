@@ -1,5 +1,6 @@
 package cn.tasays.www.july.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -25,8 +26,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     protected LinearLayout happyll;
     protected LinearLayout bookll;
     protected LinearLayout userll;
-    protected IndexFragment indexfm = new IndexFragment();//首页fm
-    protected HappyFragment happyfm =  new HappyFragment(); //新闻资讯
+
+
+    public IndexFragment indexfm = new IndexFragment();//首页fm
+    public HappyFragment happyfm;//新闻资讯  这里不进行初始化动作
     protected BookFragment  bookfm  =  new BookFragment();//创建bookfragment
     protected UserFragment  userfm  = new UserFragment(); //创建会员中心 fragment
     private long mExitTime;
@@ -40,27 +43,63 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         //1.初始化 绑定onclick
         initView();
 
-        //2.初始化fragment 默认展示主页fragment
-        //获取管理类型
-        this.getSupportFragmentManager()
-                //fragment都是以事物的方式添加 删除的
-                .beginTransaction()
-                .add(R.id.container_content,indexfm)//默认展示主页面
-                //.replace(R.id.container_content,indexfm)//replace 删除所有fragment 后添加指定1个
-                .add(R.id.container_content,happyfm)
-                .add(R.id.container_content,bookfm)
-                .add(R.id.container_content,userfm)
-                .hide(bookfm) //隐藏其他fm
-                .hide(happyfm)
-                .hide(userfm)
-                //事物添加
-                .commit();
-        myFragment = "index";
+        Intent intent = getIntent();
+        String url = intent.getStringExtra("url");
+        if(url!=null){
+            happyfm = new HappyFragment(url);
+        } else {
+            happyfm = new HappyFragment("base");
+        }
 
-        ImageView imageView = findViewById(R.id.menu_index_img);
-        imageView.setImageDrawable(getResources().getDrawable(R.drawable.index_current));
-        TextView textView = findViewById(R.id.menu_index_text);
-        setCurrentStyle(textView);
+        String showFragment = intent.getStringExtra("showFragment");
+        if(showFragment==null){
+            //2.初始化fragment 默认展示主页fragment
+            //默认展示首页
+            this.getSupportFragmentManager()
+                    //fragment都是以事物的方式添加 删除的
+                    .beginTransaction()
+                    .add(R.id.container_content,indexfm)//默认展示主页面
+                    //.replace(R.id.container_content,indexfm)//replace 删除所有fragment 后添加指定1个
+                    .add(R.id.container_content,happyfm)
+                    .add(R.id.container_content,bookfm)
+                    .add(R.id.container_content,userfm)
+                    .hide(bookfm) //隐藏其他fm
+                    .hide(happyfm)
+                    .hide(userfm)
+                    //事物添加
+                    .commit();
+            myFragment = "index";
+
+            ImageView imageView = findViewById(R.id.menu_index_img);
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.index_current));
+            TextView textView = findViewById(R.id.menu_index_text);
+            setCurrentStyle(textView);
+        }else{
+            switch (showFragment){
+                case "articleList":
+                    //默认展示文章
+                    this.getSupportFragmentManager()
+                            //fragment都是以事物的方式添加 删除的
+                            .beginTransaction()
+                            .add(R.id.container_content,indexfm)//默认展示主页面
+                            //.replace(R.id.container_content,indexfm)//replace 删除所有fragment 后添加指定1个
+                            .add(R.id.container_content,happyfm)
+                            .add(R.id.container_content,bookfm)
+                            .add(R.id.container_content,userfm)
+                            .hide(bookfm) //隐藏其他fm
+                            .hide(indexfm)
+                            .hide(userfm)
+                            //事物添加
+                            .commit();
+                    myFragment = "happy";
+
+                    ImageView imageView = findViewById(R.id.menu_happy_img);
+                    imageView.setImageDrawable(getResources().getDrawable(R.drawable.woman_current));
+                    TextView textView = findViewById(R.id.menu_happy_text);
+                    setCurrentStyle(textView);
+                    break;
+            }
+        }
 
         //添加activity到栈中
         add(MainActivity.this);

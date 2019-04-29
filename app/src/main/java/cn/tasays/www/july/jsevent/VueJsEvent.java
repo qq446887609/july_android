@@ -5,21 +5,29 @@ package cn.tasays.www.july.jsevent;
  */
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import cn.tasays.www.july.R;
 import cn.tasays.www.july.activity.ChaChaDetailActivity;
 import cn.tasays.www.july.activity.DetailActivity;
+import cn.tasays.www.july.activity.MainActivity;
+import cn.tasays.www.july.fragment.HappyFragment;
 
 public class VueJsEvent {
 
     private WebView webView;
-    private Activity activity;
+    private FragmentActivity activity;
 
     //构造方法
-    public VueJsEvent(Activity activity, WebView webView){
+    public VueJsEvent(FragmentActivity activity, WebView webView){
         this.activity = activity;
         this.webView = webView;
     }
@@ -43,6 +51,19 @@ public class VueJsEvent {
         Intent intent = new Intent(this.activity, DetailActivity.class);
         intent.putExtra("detail_url",url);
         this.activity.startActivity(intent);
+    }
+
+    /**
+     * 在index fragment 中点击查询 跳转到 文章列表fragment
+     */
+    @JavascriptInterface
+    public void jumpArticleListFragment(String url){
+        Intent intent = new Intent(this.activity, MainActivity.class);
+        //当前activity跳转到MainActivity 并且设置默认展示页面
+        intent.putExtra("showFragment","articleList");
+        intent.putExtra("url",url);
+        this.activity.startActivity(intent);
+
     }
 
     /**

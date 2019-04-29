@@ -1,6 +1,7 @@
 package cn.tasays.www.july.fragment;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,8 +25,19 @@ import cn.tasays.www.july.jsevent.VueJsEvent;
 /**
  * A simple {@link Fragment} subclass.
  */
+@SuppressLint("ValidFragment")
 public class HappyFragment extends Fragment {
 
+    //初始化时设置展示url
+    @SuppressLint("ValidFragment")
+    public HappyFragment(String url) {
+        if(url!="base"){
+            this.url = this.baseHttp+url;
+        }
+    }
+
+    private String baseHttp = "http://116.196.125.67:8080/#";
+    public String url = "http://116.196.125.67:8080/#/art_list";
     private View view;
     private FragmentTransaction fragmentTransaction;
 
@@ -51,7 +63,7 @@ public class HappyFragment extends Fragment {
         WebView webView = (WebView) view.findViewById(R.id.web_happy_woman);
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
-        webView.loadUrl("http://116.196.125.67:8080/#/art_list");
+        webView.loadUrl(url);
 
         //渲染js事件到vue页面
         webView.addJavascriptInterface(new VueJsEvent(getActivity(),webView),"$App");
