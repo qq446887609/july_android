@@ -31,7 +31,7 @@ public class HappyFragment extends Fragment {
     //初始化时设置展示url
     @SuppressLint("ValidFragment")
     public HappyFragment(String url) {
-        if(url!="base"){
+        if(url.equals("base")){
             this.url = this.baseHttp+url;
         }
     }
