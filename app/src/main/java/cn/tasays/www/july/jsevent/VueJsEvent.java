@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.activity.BookRecommendDetailListActivity;
 import cn.tasays.www.july.activity.ChaChaDetailActivity;
 import cn.tasays.www.july.activity.DetailActivity;
 import cn.tasays.www.july.activity.MainActivity;
@@ -64,6 +65,16 @@ public class VueJsEvent {
         intent.putExtra("url",url);
         this.activity.startActivity(intent);
 
+    }
+
+    /**
+     * 在index fragment中点击书单跳转到书单列表
+     */
+    @JavascriptInterface
+    public void jumpBookRecommendDetail(String url){
+        Intent intent = new Intent(this.activity, BookRecommendDetailListActivity.class);
+        intent.putExtra("list_url",url);
+        this.activity.startActivity(intent);
     }
 
     /**
