@@ -32,12 +32,14 @@ public class HappyFragment extends Fragment {
     @SuppressLint("ValidFragment")
     public HappyFragment(String url) {
         if(url.equals("base")){
-            this.url = this.baseHttp+url;
+            this.url = "http://116.196.125.67:8080/#/art_list";
+        } else {
+            this.url =  this.baseHttp+url;
         }
     }
 
     private String baseHttp = "http://116.196.125.67:8080/#";
-    public String url = "http://116.196.125.67:8080/#/art_list";
+    public String url = "";
     private View view;
     private FragmentTransaction fragmentTransaction;
 
