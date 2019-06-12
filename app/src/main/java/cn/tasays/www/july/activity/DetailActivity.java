@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 
 public class DetailActivity extends BaseActivity {
 
@@ -30,7 +31,7 @@ public class DetailActivity extends BaseActivity {
         WebView webView = (WebView) findViewById(R.id.article_detial);
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
-        detail_url = "http://116.196.125.67:8080/#"+detail_url;
+        detail_url = new BaseAPi().getBaseApi()+"/#"+detail_url;
         webView.loadUrl(detail_url);
 
         showToast(detail_url);

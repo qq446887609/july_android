@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 
 public class ChaChaDetailActivity extends BaseActivity {
 
@@ -25,7 +26,7 @@ public class ChaChaDetailActivity extends BaseActivity {
         WebView webView = (WebView) findViewById(R.id.chacha_detial);
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
-        detail_url = "http://116.196.125.67:8080/#"+detail_url;
+        detail_url = new BaseAPi().getBaseApi()+"/#"+detail_url;
         webView.loadUrl(detail_url);
 
         //添加activity到栈中

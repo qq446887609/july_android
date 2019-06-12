@@ -37,8 +37,9 @@
             android:layout_width="64dp"
             android:layout_height="64dp" />
         <TextView
+            android:id="@+id/userName"
             android:layout_marginTop="6dp"
-            android:text="适可而止c"
+            android:text=""
             android:textSize="18dp"
             android:textStyle="bold"
             android:layout_width="wrap_content"

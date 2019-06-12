@@ -19,6 +19,7 @@ import com.yanzhenjie.nohttp.rest.OnResponseListener;
 import com.yanzhenjie.nohttp.rest.Request;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 import cn.tasays.www.july.model.Result;
 import cn.tasays.www.july.model.User;
 
@@ -155,7 +156,7 @@ public class LoginActivity extends BaseActivity {
     private void postLogin()
     {
         //请求链接
-        String postUrl = "http://www.tasays.cn/api/authorizations";
+        String postUrl =  new BaseAPi().getApi()+"/api/authorizations";
 
         //创建请求
         Request<String> req = NoHttp.createStringRequest(postUrl, RequestMethod.POST);

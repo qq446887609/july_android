@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
-        if(url!=null){
+        if(url != null && url.length() != 0){
             happyfm = new HappyFragment(url);
         } else {
             happyfm = new HappyFragment("base");

@@ -8,6 +8,16 @@ public class User {
     private String avatar;
     private String token_type;
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    private String name;
+
     public String getPhone() {
         return phone;
     }
