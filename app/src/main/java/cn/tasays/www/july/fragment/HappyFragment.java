@@ -16,6 +16,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 import cn.tasays.www.july.jsevent.VueJsEvent;
 
 /**
@@ -24,16 +25,15 @@ import cn.tasays.www.july.jsevent.VueJsEvent;
 @SuppressLint("ValidFragment")
 public class HappyFragment extends Fragment {
 
-    public String apiUrl = "http://www.tasays.cn/";
-    public String vueUrl = "http://www.luvcx.site/#";
+    public String vueUrl = new BaseAPi().getVueUrl();
 
     //初始化时设置展示url
     @SuppressLint("ValidFragment")
     public HappyFragment(String url) {
-        if(url.equals("base")){
-            this.url = vueUrl+"/art_list";
-        } else {
+        if(!url.equals("base")){
             this.url =  this.baseHttp+url;
+        }else{
+            this.url = this.baseHttp+"/art_list";
         }
     }
 

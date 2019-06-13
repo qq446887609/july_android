@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 
 public class ChaChaDetailActivity extends BaseActivity {
 

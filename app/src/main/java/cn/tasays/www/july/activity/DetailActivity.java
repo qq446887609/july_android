@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 
 public class DetailActivity extends BaseActivity {
 
@@ -31,6 +32,7 @@ public class DetailActivity extends BaseActivity {
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
         detail_url = vueUrl+""+detail_url;
+
         webView.loadUrl(detail_url);
 
         showToast(detail_url);

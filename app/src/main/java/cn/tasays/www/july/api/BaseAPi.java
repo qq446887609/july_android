@@ -21,4 +21,5 @@ public class BaseAPi {
         this.vueUrl = vueUrl;
     }
 
+
 }

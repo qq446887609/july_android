@@ -102,16 +102,16 @@
             android:orientation="horizontal"
             android:layout_height="wrap_content">
             <ImageView
-                android:layout_width="48dp"
+                android:layout_width="36dp"
                 android:src="@drawable/qq"
                 android:id="@+id/qq_login"
-                android:layout_height="48dp" />
+                android:layout_height="36dp" />
             <ImageView
                 android:layout_marginLeft="40dp"
-                android:layout_width="48dp"
+                android:layout_width="36dp"
                 android:src="@drawable/wb"
                 android:id="@+id/wb_login"
-                android:layout_height="48dp" />
+                android:layout_height="36dp" />
         </LinearLayout>
 
     </LinearLayout>
