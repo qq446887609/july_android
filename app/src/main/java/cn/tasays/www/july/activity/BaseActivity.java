@@ -20,8 +20,12 @@ import com.yanzhenjie.nohttp.rest.RequestQueue;
 import java.util.Stack;
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 
 public class BaseActivity extends AppCompatActivity {
+
+    public String apiUrl = new BaseAPi().getApiUrl();
+    public String vueUrl = new BaseAPi().getVueUrl();
 
     /**
      * 请求队列

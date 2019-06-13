@@ -50,7 +50,7 @@ public class UserFragment extends BaseFragment {
     public void init_view(View view)
     {
         //请求地址
-        String getUrl = "http://www.tasays.cn/api/user";
+        String getUrl = apiUrl+"/api/user";
 
     }
 

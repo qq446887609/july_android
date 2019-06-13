@@ -55,7 +55,7 @@ public class IndexFragment extends BaseFragment{
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
 
-        webView.loadUrl("http://116.196.125.67:8080/#/");
+        webView.loadUrl(vueUrl+"/");
         //渲染js事件到vue页面
         webView.addJavascriptInterface(new VueJsEvent(getActivity(),webView),"$App");
 

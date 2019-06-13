@@ -98,7 +98,7 @@ public class SignStepOneActivity extends BaseActivity {
     public void postCaptcha()
     {
         //请求链接
-        String postUrl = "http://www.tasays.cn/api/captchas";
+        String postUrl = apiUrl+"/api/captchas";
         //创建请求
         Request<String> req = NoHttp.createStringRequest(postUrl, RequestMethod.POST);
         //请求参数

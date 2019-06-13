@@ -15,11 +15,7 @@ import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.TextView;
-
 import cn.tasays.www.july.R;
-import cn.tasays.www.july.activity.DetailActivity;
 import cn.tasays.www.july.jsevent.VueJsEvent;
 
 /**
@@ -28,17 +24,20 @@ import cn.tasays.www.july.jsevent.VueJsEvent;
 @SuppressLint("ValidFragment")
 public class HappyFragment extends Fragment {
 
+    public String apiUrl = "http://www.tasays.cn/";
+    public String vueUrl = "http://www.luvcx.site/#";
+
     //初始化时设置展示url
     @SuppressLint("ValidFragment")
     public HappyFragment(String url) {
         if(url.equals("base")){
-            this.url = "http://116.196.125.67:8080/#/art_list";
+            this.url = vueUrl+"/art_list";
         } else {
             this.url =  this.baseHttp+url;
         }
     }
 
-    private String baseHttp = "http://116.196.125.67:8080/#";
+    private String baseHttp = vueUrl;
     public String url = "";
     private View view;
     private FragmentTransaction fragmentTransaction;

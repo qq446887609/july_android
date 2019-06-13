@@ -115,7 +115,7 @@ public class SignStepThreeActivity extends BaseActivity {
 
     private void postSign()
     {
-        String postUrl = "http://www.tasays.cn/api/users";//接口连接
+        String postUrl = apiUrl+"/api/users";//接口连接
         Request<String> req = NoHttp.createStringRequest(postUrl, RequestMethod.POST);//创建post
         req.add("verification_code",validate_code);//短信验证码
         req.add("verification_key",key);//用户注册需要的key

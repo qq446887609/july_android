@@ -114,8 +114,8 @@ public class LoginActivity extends BaseActivity {
 
         if(!access_token.isEmpty())
         {
-            //跳转首页 mainactivity webview vue页面
-            startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            //发起登录
+            postLogin(false);
         }
     }
 
@@ -132,7 +132,7 @@ public class LoginActivity extends BaseActivity {
         }
 
         //发起登录
-        postLogin();
+        postLogin(true);
     }
 
     //验证数据
@@ -152,10 +152,10 @@ public class LoginActivity extends BaseActivity {
     }
 
     //开始登录
-    private void postLogin()
+    private void postLogin(final boolean showProcess)
     {
         //请求链接
-        String postUrl = "http://www.tasays.cn/api/authorizations";
+        String postUrl = apiUrl+"/api/authorizations";
 
         //创建请求
         Request<String> req = NoHttp.createStringRequest(postUrl, RequestMethod.POST);
@@ -172,18 +172,22 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onStart(int what) {
 
-                //显示进度条
-                progressDialog = new ProgressDialog(LoginActivity.this);
-                progressDialog.setMessage("登录中....");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                if(showProcess){
+                    //显示进度条
+                    progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.setMessage("登录中....");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                }
             }
 
             @Override
             public void onSucceed(int what, com.yanzhenjie.nohttp.rest.Response<String> response) {
 
-                //关闭dialog
-                progressDialog.dismiss();
+                if(showProcess){
+                    //关闭dialog
+                    progressDialog.dismiss();
+                }
 
                 String result = response.get();
 
@@ -217,8 +221,10 @@ public class LoginActivity extends BaseActivity {
 
                 //        这里还有很多错误类型，可以看demo：
                 //        https://github.com/yanzhenjie/NoHttp
-                //关闭dialog
-                progressDialog.dismiss();
+                if(showProcess){
+                    //关闭dialog
+                    progressDialog.dismiss();
+                }
                 showToast("登录失败");
             }
 

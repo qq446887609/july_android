@@ -13,12 +13,15 @@ import android.widget.TextView;
 
 
 import cn.tasays.www.july.R;
+import cn.tasays.www.july.api.BaseAPi;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public abstract class BaseFragment extends Fragment {
 
+    public String apiUrl = new BaseAPi().getApiUrl();
+    public String vueUrl = new BaseAPi().getVueUrl();
 
 
     @Nullable

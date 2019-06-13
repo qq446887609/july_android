@@ -45,6 +45,6 @@ public class BookFragment extends BaseFragment {
         WebView webView = (WebView) view.findViewById(R.id.web_book);
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
-        webView.loadUrl("http://116.196.125.67:8080/#/bookshelf");
+        webView.loadUrl(vueUrl+"/bookshelf");
     }
 }

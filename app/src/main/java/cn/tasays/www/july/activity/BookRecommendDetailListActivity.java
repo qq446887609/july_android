@@ -25,7 +25,7 @@ public class BookRecommendDetailListActivity extends BaseActivity {
         WebView webView = findViewById(R.id.book_recommend_detail);
         webView.getSettings().setJavaScriptEnabled(true);//开启javascript
         webView.getSettings().setDomStorageEnabled(true);
-        list_url = "http://116.196.125.67:8080/#"+list_url;
+        list_url = vueUrl+""+list_url;
         webView.loadUrl(list_url);
 
         //添加activity到栈中
