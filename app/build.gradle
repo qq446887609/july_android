@@ -29,6 +29,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.squareup.okhttp3:okhttp:3.4.1'
     implementation 'com.google.code.gson:gson:2.7'
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     //nohttp
     implementation 'com.yanzhenjie.nohttp:nohttp:1.1.11'
+    //申请动态权限
+    implementation 'com.lovedise:permissiongen:0.0.6'
+    //第三方AlertDialog
+    implementation 'com.bigkoo:alertview:1.0.3'
 }

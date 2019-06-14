@@ -29,6 +29,7 @@ import cn.tasays.www.july.model.User;
 import okhttp3.internal.http.RequestLine;
 
 import static android.content.Context.MODE_PRIVATE;
+import static cn.tasays.www.july.activity.BaseActivity.killAll;
 
 /**
  * user信息
@@ -48,6 +49,8 @@ public class UserFragment extends BaseFragment {
 
         init_view(view);
 
+        init_click(view);
+
         //添加fragment到栈中
         FragmentManager fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -56,6 +59,8 @@ public class UserFragment extends BaseFragment {
 
         return  view;
     }
+
+
 
     /**
      * 初始化用户数据 api请求获得用户信息接口
@@ -116,5 +121,29 @@ public class UserFragment extends BaseFragment {
     @Override
     public boolean onKeyDown(int keyCode,KeyEvent event) {
         return false;
+    }
+
+    /**
+     * 初始化事件
+     */
+    public void init_click(View view)
+    {
+        TextView loginBtn = view.findViewById(R.id.login_out_btn);
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginOut();
+            }
+        });
+    }
+
+    //退出登录
+    public void loginOut()
+    {
+        SharedPreferences user_data = getActivity().getSharedPreferences("user_data",MODE_PRIVATE);
+        user_data.edit().clear().commit();
+
+        killAll();
     }
 }
