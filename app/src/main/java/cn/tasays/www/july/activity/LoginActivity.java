@@ -18,6 +18,7 @@ import com.yanzhenjie.nohttp.RequestMethod;
 import com.yanzhenjie.nohttp.rest.OnResponseListener;
 import com.yanzhenjie.nohttp.rest.Request;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.tasays.www.july.R;
 import cn.tasays.www.july.api.BaseAPi;
 import cn.tasays.www.july.model.Result;
@@ -49,6 +50,8 @@ public class LoginActivity extends BaseActivity {
 
         //添加activity到栈中
         add(LoginActivity.this);
+
+
     }
 
     private void jump_sign_listen() {

@@ -11,8 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.tasays.www.july.R;
 import cn.tasays.www.july.fragment.BookFragment;
 import cn.tasays.www.july.fragment.HappyFragment;
@@ -40,7 +43,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //1.初始化 绑定onclick
         initView();
 
         Intent intent = getIntent();
