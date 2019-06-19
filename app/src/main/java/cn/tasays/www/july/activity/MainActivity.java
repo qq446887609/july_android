@@ -1,8 +1,18 @@
 package cn.tasays.www.july.activity;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -105,6 +115,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         //添加activity到栈中
         add(MainActivity.this);
+
+        registerMessageReceiver();  // 注册广播接收
     }
 
 
@@ -273,6 +285,55 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         obj.setBaseImg(drawable);
         return  obj;
     }
+
+    //for receive customer msg from jpush server
+    private MessageReceiver mMessageReceiver;
+    public static final String MESSAGE_RECEIVED_ACTION = "cn.tasays.www.july.MESSAGE_RECEIVED_ACTION";
+    public static final String KEY_MESSAGE = "message";
+
+    public void registerMessageReceiver() {
+        mMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                    String messge = intent.getStringExtra(KEY_MESSAGE);
+                    String id = "my_channel_01";
+                    String name="我是渠道名字";
+                    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                    Notification notification = null;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        NotificationChannel mChannel = new NotificationChannel(id, name, NotificationManager.IMPORTANCE_LOW);
+                        notificationManager.createNotificationChannel(mChannel);
+                        notification = new Notification.Builder(context)
+                                .setChannelId(id)
+                                .setContentTitle("july")
+                                .setContentText(messge)
+                                .setSmallIcon(R.mipmap.ic_launcher).build();
+                    } else {
+                        NotificationCompat.Builder notificationBuilder =  new NotificationCompat.Builder(context, id)
+                                .setContentTitle("5 new messages")
+                                .setContentText("hahaha")
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setOngoing(true);
+                        notification = notificationBuilder.build();
+                    }
+                    int  notifiId=1;
+                    notificationManager.notify(notifiId,notification);
+                }
+            } catch (Exception e){
+            }
+        }
+    }
+
 
 }
 
